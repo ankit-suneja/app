@@ -1,8 +1,8 @@
 const express = require ("express");
-// import { Express } from "express";
+
 const  getAllUser  = require("../controllers/user-controller");
 
-const router= express.router();
+const router= express.Router();
 
 router.get("/", getAllUser)
 
