@@ -1,10 +1,9 @@
+const User = require("../model/user")
 
-const user = require("../model/user")
-
-const getAllUser= async(req, res, next)=>{
+ const getAllUser= async(req, res, next)=>{
     let users;
     try{
-        users = await user.find();
+        users = await User.find();
     }
     catch (err){
         console.log(err)
@@ -20,41 +19,30 @@ const signup = async(req, res, next)=>{
     
     let existingUser;
     try {
-        existingUser= await user.findOne({email})
-
+        existingUser= await User.findOne({email})
     }catch(err){
-    console.log(err);
+    return console.log(err);
     }
     if (existingUser){
         return res.status(400).json({message: "user already exists! Login instead"})
 
     }
-    const user= new User({
+    const newUser= new User({
         name,
         email,
         password
     });
 
     try{
-        await user.save();
+        await newUser.save();
 
     }catch(err){
-        console.log(err);
+        return console.log(err);
     }
-    return res.status(201).json({user})
+    return res.status(201).json({User})
 }
 
 
 
 
-
-
-
-
-
-
-
-
-
-module.exports= signup
-module.exports= getAllUser
+module.exports = { signup, getAllUser };

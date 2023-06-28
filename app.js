@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./Backend/routes/user-routes.js")
+const userRoutes = require("./Backend/routes/user-routes.js");
 // const getAllUser= require("./Backend/controllers/user-controller.js")
 
 const app = express()
-
-app.use("/api/user", router)
+app.use(express.json())
+app.use("/api/user", userRoutes)
 
 
 mongoose.connect('mongodb+srv://admin:RwMZOP2HhrrHNmt9@cluster0.ghyejse.mongodb.net/')
