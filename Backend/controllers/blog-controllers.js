@@ -15,4 +15,23 @@ const getAllBlog = async(req, res, next)=>{
     return res.status(200).json({blogs})
 }
 
-module.exports = { getAllBlog }
+const addBlog = async(req, res, next)=>{
+        const { title, description, image, user} = req.body;
+        const blog= new Blog({
+            title,
+            description,
+            image,
+            user
+        })
+        try{
+            await blog.save()
+
+        }catch{(err)
+        return console.log(err);
+        }
+        return res.status(200).json({blog})
+}
+
+
+
+module.exports = { getAllBlog, addBlog }
