@@ -33,7 +33,7 @@ const addBlog = async(req, res, next)=>{
 }
 const updateBlog = async(req, res, next)=>{
     const {title, description}= req.body
-    const BlogId= req.params.id 
+    const BlogId = req.params.id 
     let blog;
     try{
         blog = await Blog.findByIdAndUpdate(BlogId, {
@@ -49,7 +49,7 @@ if(!blog){
 }
 
 const getById = async(req, res, next)=>{
-    const {id}= req.params.id
+    const id = req.params.id
     let blog;
     try{ 
         blog = await Blog.findById(id);
@@ -62,6 +62,21 @@ const getById = async(req, res, next)=>{
     }return res.status(200).json({blog})
 }
 
+const deleteBlog = async(req, res, next)=>{
+    const id = req.params.id;
+    let blog;
+    try{
+        blog= await blog.findByIdAndRemove(id)
+    }catch(err){
+        console.log(err);
+    }
+    if(!blog){
+        return res.status(500).json({message:"unable to delete blog"})
+    }
+    return res.status(200).json({message:"successfully deleted blog"})
+    
+}
 
 
-module.exports = { getAllBlog, addBlog, updateBlog, getById }
+
+module.exports = { getAllBlog, addBlog, updateBlog, getById, deleteBlog }
