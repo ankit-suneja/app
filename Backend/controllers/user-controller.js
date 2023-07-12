@@ -16,6 +16,7 @@ const bcrypt = require("bcryptjs")
     return res.status(200).json({users});
 }
 
+
 const signup = async(req, res, next)=>{
     const {name, email, password} = req.body
     
